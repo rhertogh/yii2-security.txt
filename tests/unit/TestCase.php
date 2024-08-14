@@ -8,15 +8,11 @@
 
 namespace Yii2SecurityTxtTests\unit;
 
-use League\OAuth2\Server\CryptKey;
-use rhertogh\Yii2Oauth2Server\components\server\Oauth2ResourceServer;
-use rhertogh\Yii2Oauth2Server\interfaces\components\repositories\Oauth2AccessTokenRepositoryInterface;
 use Yii;
 use yii\di\Container;
 use yii\helpers\ArrayHelper;
 use yii\helpers\ReplaceArrayValue;
 use yii\helpers\UnsetArrayValue;
-use Yii2SecurityTxtTests\_helpers\BearerTokenValidatorHelper;
 
 /**
  * This is the base class for all yii framework unit tests.
@@ -74,22 +70,6 @@ abstract class TestCase extends \Codeception\Test\Unit
     protected function mockConsoleApplication($config = [], $appClass = '\yii\console\Application')
     {
         new $appClass($this->getMockConsoleAppConfig($config));
-    }
-
-    protected function mockApplicationWithoutOauth2($config = [], $appClass = '\yii\console\Application')
-    {
-        $this->mockConsoleApplication(
-            ArrayHelper::merge(
-                [
-                    'bootstrap' => new ReplaceArrayValue([]),
-                    'modules' => [
-                        'oauth2' => new UnsetArrayValue(),
-                    ],
-                ],
-                $config
-            ),
-            $appClass
-        );
     }
 
     protected function mockWebApplication($config = [], $appClass = '\yii\web\Application')
@@ -244,61 +224,5 @@ abstract class TestCase extends \Codeception\Test\Unit
             $method->setAccessible(false);
         }
         return $result;
-    }
-
-    /**
-     * Changes db component config
-     * @param $db
-     */
-    protected function switchDbConnection($db)
-    {
-        $databases = $this->getParam('databases');
-        if (isset($databases[$db])) {
-            $database = $databases[$db];
-            Yii::$app->db->close();
-            Yii::$app->db->dsn = isset($database['dsn']) ? $database['dsn'] : null;
-            Yii::$app->db->username = isset($database['username']) ? $database['username'] : null;
-            Yii::$app->db->password = isset($database['password']) ? $database['password'] : null;
-        }
-    }
-
-    /**
-     * @return CryptKey
-     */
-    protected function getMockPrivateCryptKey()
-    {
-        $keyPath = Yii::getAlias($this->privateCryptKeyPath);
-        chmod($keyPath, 0660);
-        return new CryptKey($keyPath, $this->privateCryptKeyPassPhrase);
-    }
-
-    /**
-     * @return CryptKey
-     */
-    protected function getMockPublicCryptKey()
-    {
-        $keyPath = Yii::getAlias($this->publicCryptKeyPath);
-        chmod($keyPath, 0660);
-        return new CryptKey($keyPath);
-    }
-
-    /**
-     * @return Oauth2ResourceServer
-     */
-    protected function getMockResourceServer()
-    {
-        return new Oauth2ResourceServer(
-            Yii::createObject(Oauth2AccessTokenRepositoryInterface::class),
-            $this->getMockPublicCryptKey()
-        );
-    }
-
-    protected function getBearerTokenValidatorHelper()
-    {
-        $bearerTokenValidatorHelper = new BearerTokenValidatorHelper(
-            Yii::createObject(Oauth2AccessTokenRepositoryInterface::class)
-        );
-        $bearerTokenValidatorHelper->setPublicKey($this->getMockPublicCryptKey());
-        return $bearerTokenValidatorHelper;
     }
 }

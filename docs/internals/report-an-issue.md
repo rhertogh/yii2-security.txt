@@ -17,6 +17,6 @@ Please follow the guidelines below when creating an issue so that your issue can
 
 **Avoid duplicated issues**
 
-Before you report an issue, please search through [existing issues](https://github.com/rhertogh/yii2-oauth2-server/issues) 
+Before you report an issue, please search through [existing issues](https://github.com/rhertogh/yii2-security.txt/issues) 
 to see if your issue is already reported or fixed to make sure you are not reporting a duplicated issue. 
-Also make sure you have the latest version of the Yii2-Oauth2-Server and see if the issue still exists.
+Also make sure you have the latest version of the Yii2 security.txt extension and see if the issue still exists.

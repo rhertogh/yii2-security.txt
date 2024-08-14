@@ -29,7 +29,7 @@ if (is_readable(__DIR__ . '/../.env')) {
 }
 
 Yii::setAlias('@Yii2SecurityTxtTests', __DIR__);
-Yii::setAlias('@rhertogh/Yii2Oauth2Server', $projectRoot . '/src');
+Yii::setAlias('@rhertogh/Yii2SecurityTxt', $projectRoot . '/src');
 
 Yii::setAlias('@vendor', $projectRoot . '/vendor');
 

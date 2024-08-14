@@ -1,8 +1,5 @@
 <?php
 
-use rhertogh\Yii2Oauth2Server\SecurityTxtModule;
-use Yii2SecurityTxtTests\_helpers\TestUserModel;
-
 // phpcs:disable Generic.Files.LineLength.TooLong -- Sample documentation
 return [
 

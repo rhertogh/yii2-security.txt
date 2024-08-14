@@ -15,7 +15,7 @@ use Yii2SecurityTxtTests\unit\TestCase;
 /**
  * @covers rhertogh\Yii2SecurityTxt\controllers\web\wellknown\SecurityTxtAction
  */
-class Oauth2OpenidConfigurationActionTest extends TestCase
+class SecurityTxtActionTest extends TestCase
 {
     protected function getMockController()
     {

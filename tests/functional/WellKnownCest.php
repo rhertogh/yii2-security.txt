@@ -15,7 +15,7 @@ use Yii2SecurityTxtTests\functional\_base\BaseGrantCest;
  */
 class WellKnownCest
 {
-    public function oauth2ConfigurationTest(ApiTester $I)
+    public function securityTxtTest(ApiTester $I)
     {
         Yii::$container->set(ClockInterface::class, (new FrozenClock(new \DateTimeImmutable('2020-01-01 01:02:03'))));
 
