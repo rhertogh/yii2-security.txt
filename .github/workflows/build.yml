@@ -31,6 +31,11 @@ jobs:
           extensions: gnupg
           ini-values: date.timezone='UTC', session.save_path="${{ runner.temp }}"
 
+      - name: Configure GNUPG home
+        run: |
+          mkdir -p ${{ runner.temp }}/.gnupg
+          export GNUPGHOME="${{ runner.temp }}/.gnupg"
+
       - name: Get composer cache directory
         id: composer-cache
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"
