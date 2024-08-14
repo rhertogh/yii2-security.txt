@@ -34,6 +34,7 @@ jobs:
       - name: Create GNUPG home
         run: |
           mkdir -p ${{ runner.temp }}/.gnupg
+          chmod 777 ${{ runner.temp }}/.gnupg
 
       - name: Get composer cache directory
         id: composer-cache
