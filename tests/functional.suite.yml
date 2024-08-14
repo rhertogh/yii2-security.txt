@@ -1,0 +1,12 @@
+actor: ApiTester
+modules:
+  enabled:
+    - Asserts
+    - Yii2SecurityTxtTests\Helper\Yii2Module:
+        configFile: 'tests/_config/site_full.php'
+        responseCleanMethod: recreate
+        recreateComponents: []
+
+coverage:
+  include:
+    - src/*

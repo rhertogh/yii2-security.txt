@@ -1,0 +1,16 @@
+# Codeception Test Suite Configuration
+
+# suite for unit (internal) tests.
+# RUN `build` COMMAND AFTER ADDING/REMOVING MODULES.
+
+#class_name: UnitTester
+modules:
+  enabled:
+    - Asserts
+    - Yii2SecurityTxtTests\Helper\Yii2Module:
+        configFile: 'tests/_config/main.php'
+
+coverage:
+  include:
+    - src/*
+

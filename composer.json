@@ -1,6 +1,6 @@
 {
     "name": "rhertogh/yii2-security.txt",
-    "description": "A Yii2 extension to serve a .well-known/security.txt",
+    "description": "A Yii2 extension to serve .well-known/security.txt",
     "keywords": [
         "Yii2",
         "security.txt",
@@ -28,7 +28,12 @@
         "codeception/codeception": "~4.1.22",
         "codeception/module-yii2": "~1.1.3",
         "codeception/module-asserts": "~1.3.1",
-        "yiisoft/yii2-debug": "~2.1.18"
+        "yiisoft/yii2-debug": "~2.1.18",
+        "vlucas/phpdotenv": "~5.3",
+        "lcobucci/clock": "~3.0.0"
+    },
+    "suggest": {
+        "ext-gnupg": "*"
     },
     "autoload": {
         "psr-4": {

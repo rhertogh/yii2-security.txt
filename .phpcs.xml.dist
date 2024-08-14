@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="PHP_CodeSniffer" xsi:noNamespaceSchemaLocation="phpcs.xsd">
+    <description>The coding standard for the Yii2SecurityTxt project.</description>
+
+    <file>sample</file>
+    <file>src</file>
+    <file>tests</file>
+
+    <exclude-pattern>sample/runtime</exclude-pattern>
+    <exclude-pattern>sample/web/assets</exclude-pattern>
+    <exclude-pattern>tests/_runtime</exclude-pattern>
+    <exclude-pattern>/sample/dev/giiant/generators/model/templates</exclude-pattern>
+
+    <arg name="basepath" value="."/>
+    <arg name="colors"/>
+    <arg name="parallel" value="75"/>
+    <arg name="encoding" value="utf-8"/>
+    <arg name="report-width" value="120"/>
+    <arg value="p"/><!-- Show progress of the run -->
+    <arg value="s"/><!-- Show sniff codes in all reports -->
+
+    <rule ref="PSR1"/>
+
+    <!--
+        PSR-12: Extended Coding Style (https://www.php-fig.org/psr/psr-12/)
+        Includes PSR-1: Basic Coding Standard (https://www.php-fig.org/psr/psr-1/)
+    -->
+    <rule ref="PSR12">
+
+        <!-- Disable warning for property and method declaration with underscores for now -->
+        <exclude name="PSR2.Classes.PropertyDeclaration.Underscore"/>
+        <exclude name="PSR2.Methods.MethodDeclaration.Underscore"/>
+
+    </rule>
+
+    <!-- Requires short array syntax, i.e. [] instead of array() -->
+    <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
+
+    <!-- Forbids empty statements -->
+    <rule ref="Generic.CodeAnalysis.EmptyStatement">
+        <exclude name="Generic.CodeAnalysis.EmptyStatement.DetectedCatch"/>
+    </rule>
+
+    <!-- Requires camel-caps naming for functions -->
+    <rule ref="Generic.NamingConventions.CamelCapsFunctionName">
+        <properties>
+            <!-- allow things like getMyID zomg two caps next to each other! -->
+            <property name="strict" value="false"/>
+        </properties>
+    </rule>
+
+    <!-- Forbids whitespace in typecasts, e.g. ( int ) -->
+    <rule ref="Squiz.WhiteSpace.CastSpacing"/>
+
+    <!-- Forbids whitespace before semicolons, e.g. doStuff() ; -->
+    <rule ref="Squiz.WhiteSpace.SemicolonSpacing"/>
+
+    <!-- Requires whitespace around logical operators, e.g. (this && that) -->
+    <rule ref="Squiz.WhiteSpace.LogicalOperatorSpacing"/>
+
+    <!-- Don't hide tokenizer exceptions -->
+    <rule ref="Internal.Tokenizer.Exception">
+        <type>error</type>
+    </rule>
+
+    <!-- Requires comment for variables -->
+    <rule ref="Squiz.Commenting.VariableComment.Missing">
+        <!-- Only apply to `src` directory. Note: include patterns are checked using absolute paths -->
+        <include-pattern>*/src/*</include-pattern>
+    </rule>
+
+    <rule ref="Squiz.ControlStructures.ControlSignature">
+        <exclude name="Squiz.WhiteSpace.ControlStructureSpacing.SpacingAfterOpen"/>
+    </rule>
+    <rule ref="Squiz.Commenting.DocCommentAlignment"/>
+    <rule ref="Generic.ControlStructures.DisallowYodaConditions"/>
+
+    <rule ref="Squiz.Commenting.InlineComment.InvalidEndChar">
+        <type>warning</type>
+    </rule>
+
+    <rule ref="Squiz.Functions.MultiLineFunctionDeclaration.NewlineBeforeOpenBrace">
+        <!-- https://github.com/squizlabs/PHP_CodeSniffer/issues/2096 -->
+        <exclude name="Squiz.Functions.MultiLineFunctionDeclaration.NewlineBeforeOpenBrace"/>
+    </rule>
+
+    <rule ref="Generic.PHP.DeprecatedFunctions">
+        <type>warning</type>
+    </rule>
+
+</ruleset>

@@ -1,0 +1,23 @@
+includes:
+    - vendor/proget-hq/phpstan-yii2/extension.neon
+
+parameters:
+
+    level: 2
+
+    paths:
+        - src
+#        - tests
+
+    excludePaths:
+        -   sample/runtime
+        -   tests/_runtime
+
+    scanFiles:
+        - vendor/yiisoft/yii2/Yii.php
+
+    yii2:
+        config_path: sample/config/site.php
+
+#    autoload_files:
+#        - vendor/yiisoft/yii2/Yii.php

@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+
+  Yii2SecurityTxt:
+    build:
+      context: .
+      dockerfile: docker/Yii2SecurityTxt/Dockerfile
+    image: "rhertogh/yii2-securitytxt"
+    networks:
+      - dev
+    ports:
+      - '${DOCKER_HOST_HTTP_PORT:-80}:80' # http port mapping
+    volumes:
+      # Re-use local composer cache via host-volume
+      - ~/.composer-docker/cache:/root/.composer/cache:delegated
+      # Mount source-code for development
+      - .:/app
+    environment:
+      # Yii2
+      - YII_ENV=${YII_ENV:-dev}
+      # PHP & Xdebug
+      - PHP_IDE_CONFIG=${PHP_IDE_CONFIG:-serverName=Yii2SecurityTxt}
+      - PHP_ENABLE_XDEBUG=${PHP_ENABLE_XDEBUG:-1}
+      - XDEBUG_MODE=${XDEBUG_MODE}
+      - XDEBUG_CONFIG=${XDEBUG_CONFIG}
+      # Yii2 security.txt
+      - YII2_SECURITY_TXT_PGP_PRIVATE_KEY=${YII2_SECURITY_TXT_PGP_PRIVATE_KEY:?err}
+    extra_hosts:
+      - host.docker.internal:host-gateway
+
+networks:
+  dev:
+    driver: bridge
+    name: dev
