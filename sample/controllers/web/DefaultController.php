@@ -2,7 +2,6 @@
 
 namespace sample\controllers\web;
 
-use yii\helpers\Html;
 use yii\web\Controller;
 
 class DefaultController extends Controller

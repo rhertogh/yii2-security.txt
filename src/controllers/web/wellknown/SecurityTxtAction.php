@@ -3,8 +3,8 @@
 namespace rhertogh\Yii2SecurityTxt\controllers\web\wellknown;
 
 use Exception;
-use gnupg;
 use rhertogh\Yii2SecurityTxt\controllers\web\SecurityTxtWellKnownController;
+use rhertogh\Yii2SecurityTxt\helpers\GPG\GPGHelper;
 use Yii;
 use yii\base\Action;
 use yii\base\InvalidConfigException;
@@ -63,17 +63,7 @@ class SecurityTxtAction extends Action
         $output = substr($output, 0, - strlen(PHP_EOL));
 
         if ($module->pgpPrivateKey) {
-            if (!extension_loaded('gnupg')) {
-                throw new InvalidConfigException('PHP extension "gnupg" must be loaded in order generate a signed security.txt file.');
-            }
-            Yii::beginProfile('Generate PGP signature', __METHOD__);
-            $gpg = new gnupg();
-            $gpg->seterrormode(GNUPG_ERROR_EXCEPTION);
-            $info = $gpg->import($module->pgpPrivateKey);
-            $gpg->addsignkey($info['fingerprint']);
-            $gpg->setsignmode(gnupg::SIG_MODE_CLEAR);
-            $output = $gpg->sign($output);
-            Yii::endProfile('Generate PGP signature', __METHOD__);
+            $output = GPGHelper::sign($output, $module->pgpPrivateKey);
         }
 
         Yii::$app->response->format = Response::FORMAT_RAW;

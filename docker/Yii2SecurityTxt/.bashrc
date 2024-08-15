@@ -10,7 +10,6 @@ __  __ _  _  ___                                     _  __            __        
 MSG
 
 echo "PHP version: ${PHP_VERSION}"
-echo "DB driver: ${YII_DB_DRIVER}"
 
 if ! shopt -oq posix; then
   if [ -f /usr/share/bash-completion/bash_completion ]; then

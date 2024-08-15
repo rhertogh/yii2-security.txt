@@ -21,9 +21,10 @@ RUN apt-get install -y iputils-ping
 RUN apt-get -y install libgpgme-dev
 RUN pecl install -f gnupg && docker-php-ext-enable gnupg
 
-RUN mkdir -p /home/www-data/.gnupg
-RUN chown www-data:www-data /home/www-data/.gnupg
-ENV GNUPGHOME="/home/www-data/.gnupg"
+# Note: `/var/www` is the home directory for www-data
+RUN mkdir -p /var/www/.gnupg
+RUN chown www-data:www-data /var/www/.gnupg
+ENV GNUPGHOME="/var/www/.gnupg"
 
 COPY docker/Yii2SecurityTxt/apache/vhost.conf /etc/apache2/sites-available/000-default.conf
 

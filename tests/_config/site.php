@@ -1,9 +1,6 @@
 <?php
 
-use Codeception\Stub;
 use yii\helpers\ArrayHelper;
-use yii\web\AssetManager;
-use yii\web\Request;
 use Yii2SecurityTxtTests\_helpers\NoHeadersResponse;
 use Yii2SecurityTxtTests\_helpers\TestUserComponent;
 use Yii2SecurityTxtTests\_helpers\TestUserModel;

@@ -3,7 +3,8 @@
 namespace Yii2SecurityTxtTests\unit\controllers\web\wellknown;
 
 
-use gnupg;
+use Crypt_GPG;
+use Crypt_GPG_Signature;
 use Lcobucci\Clock\FrozenClock;
 use Psr\Clock\ClockInterface;
 use rhertogh\Yii2SecurityTxt\controllers\web\SecurityTxtWellKnownController;
@@ -96,14 +97,6 @@ class SecurityTxtActionTest extends TestCase
 
         $publicKey = getenv('YII2_SECURITY_TXT_PGP_PUBLIC_KEY');
 
-        $gpg = new gnupg();
-        $gpg->seterrormode(GNUPG_ERROR_EXCEPTION);
-        $info = $gpg->import($publicKey);
-        $gpg->addencryptkey($info['fingerprint']);
-        $info = $gpg->verify($response,false,$plaintext);
-
-        $this->assertEquals(0, $info[0]['summary']);
-
         $expected = <<<'TXT'
             # This is a header comment.
             # It's included at the beginning of the security.txt file.
@@ -132,7 +125,17 @@ class SecurityTxtActionTest extends TestCase
 
             TXT;
 
-        $this->assertSame($expected, $plaintext);
+        $gpg = new Crypt_GPG();
+        $keyInfo = $gpg->importKey($publicKey);
+        $gpg->addEncryptKey($keyInfo['fingerprint']);
+        /** @var array{
+         *     data: string,
+         *     signatures: Crypt_GPG_Signature[],
+         * } $info
+         */
+        $info = $gpg->decryptAndVerify($response);
 
+        $this->assertTrue($info['signatures'][0]->isValid());
+        $this->assertSame($expected, $info['data']);
     }
 }

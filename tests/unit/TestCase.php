@@ -11,8 +11,6 @@ namespace Yii2SecurityTxtTests\unit;
 use Yii;
 use yii\di\Container;
 use yii\helpers\ArrayHelper;
-use yii\helpers\ReplaceArrayValue;
-use yii\helpers\UnsetArrayValue;
 
 /**
  * This is the base class for all yii framework unit tests.

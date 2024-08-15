@@ -8,7 +8,6 @@ use Lcobucci\Clock\FrozenClock;
 use Psr\Clock\ClockInterface;
 use Yii;
 use Yii2SecurityTxtTests\ApiTester;
-use Yii2SecurityTxtTests\functional\_base\BaseGrantCest;
 
 /**
  * Ensure we can't access the test API without authorization

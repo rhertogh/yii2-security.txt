@@ -7,7 +7,6 @@ use sample\components\UserComponent;
 use sample\models\User as UserIdentity;
 use sample\modules\api\ApiModule;
 use yii\helpers\ArrayHelper;
-use yii\web\Request;
 
 // phpcs:disable Generic.Files.LineLength.TooLong  -- Sample documentation
 return ArrayHelper::merge(require('site.php'), [
