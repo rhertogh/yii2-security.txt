@@ -25,7 +25,7 @@ jobs:
 
       - name: Install and configure GNUPG
         run: |
-          apt-get -y install libgpgme-dev
+          sudo apt-get install -y libgpgme-dev
           mkdir -p ${{ runner.temp }}/.gnupg
           chmod 777 ${{ runner.temp }}/.gnupg
 
