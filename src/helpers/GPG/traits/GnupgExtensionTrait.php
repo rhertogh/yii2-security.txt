@@ -41,7 +41,7 @@ trait GnupgExtensionTrait
         ];
 
         if (empty($debugInfo['engineInfo']['home_dir'])) {
-            $debugInfo['hint'] = 'The gnupg home directory is not set, it can be set via the GNUPGHOME environment variable.';
+            $debugInfo['hint'] = 'The gnupg home directory is not set, therefore the default "~/.gnupg" will be used. It should be writable or can be changed via the GNUPGHOME environment variable.';
         } elseif (!is_writable($debugInfo['engineInfo']['home_dir'])) {
             $debugInfo['hint'] = 'The gnupg home directory (' . $debugInfo['engineInfo']['home_dir'] . ') might not be writable. '
                 . 'Hint: can be changed via the GNUPGHOME environment variable.';
