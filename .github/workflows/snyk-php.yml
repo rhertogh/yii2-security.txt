@@ -1,4 +1,4 @@
-name: Snyk PHP
+name: Snyk PHP Scan
 
 on:
   push:
@@ -10,18 +10,21 @@ on:
     - cron: '50 7 * * 5'
 
 jobs:
-  security:
+  snyk:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - name: Run Snyk to check for vulnerabilities
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Snyk PHP Scan
         uses: snyk/actions/php@master
         continue-on-error: true # To make sure that SARIF upload gets called
         env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }} # https://github.com/snyk/actions#getting-your-snyk-token
         with:
-          args: --sarif-file-output=snyk.sarif
-      - name: Upload result to GitHub Code Scanning
-        uses: github/codeql-action/upload-sarif@v2
+          args: --sarif-file-output=snyk.sarif --severity-threshold=medium
+
+      - name: Upload results to GitHub Code Scanning
+        uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: snyk.sarif
