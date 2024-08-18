@@ -7,7 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Please check the [Upgrading Instructions](UPGRADE.md) when upgrading to a newer version.  
 
-[1.0.0-alpha] - Unreleased
+[1.0.0-alpha2] - Unreleased
+----------------------------
+
+### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Improved
+
+### Security
+
+
+[1.0.0-alpha1] - 2024-08-18
 ----------------------------
 
 ### Added
