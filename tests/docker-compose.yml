@@ -10,7 +10,7 @@ services:
         PHP_VERSION: ${PHP_VERSION:-8.1}
     image: rhertogh/yii2-securitytxt-php${PHP_VERSION:-8.1}
     networks:
-      - test
+      - Yii2SecurityTxtTest
     ports:
       - '${DOCKER_HOST_HTTP_PORT:-88}:80' # http port mapping, it's recommended to use a different port than the default sample app.
     volumes:
@@ -34,6 +34,6 @@ services:
       - host.docker.internal:host-gateway
 
 networks:
-  test:
+  Yii2SecurityTxtTest:
     driver: bridge
-    name: test
+    name: Yii2SecurityTxtTest
