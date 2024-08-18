@@ -1,4 +1,7 @@
-FROM yiisoftware/yii2-php:8.1-apache
+ARG PHP_VERSION=8.1
+FROM yiisoftware/yii2-php:${PHP_VERSION}-apache
+
+ARG APP_DIR=/app
 
 # Setting default YII2_SECURITY_TXT_* for stand-alone sample usage
 # Note: These keys are provided for sample use only. NEVER use them for other purposes! (These environment variables should be kept in sync in the docker-compose files).
@@ -6,7 +9,6 @@ ENV YII2_SECURITY_TXT_PGP_PRIVATE_KEY="-----BEGIN PGP PRIVATE KEY BLOCK-----\n\n
 
 COPY docker/Yii2SecurityTxt/.bashrc /root/.bashrc
 
-ARG APP_DIR=/app
 RUN echo "APP_DIR: ${APP_DIR}"
 
 RUN echo "deb http://ftp.de.debian.org/debian buster main" >> /etc/apt/sources.list
@@ -31,20 +33,6 @@ COPY docker/Yii2SecurityTxt/apache/vhost.conf /etc/apache2/sites-available/000-d
 # Create alias for PHP with Xdebug
 RUN echo 'alias phpx="php -d xdebug.start_with_request=1"' >> ~/.bashrc
 
-# Copy the app directory. NOTE! For development docker-compose will overwrite this directory with a mount
-COPY --chown=root:www-data --chmod=740 . ${APP_DIR}
-# In the COPY above --chmod should be "=u=rwX,g=rX,o=" so no further `chmod` is needed but that's currently not supported: https://github.com/moby/buildkit/issues/1951
-RUN find ${APP_DIR} -path "./vendor" -prune -o -type d -exec chmod 750 {} +
-# Change ownership for the app root directory (not set by the COPY command). Note: no chown is currently needed since it's already set by the workaround above.
-RUN chown root:www-data ${APP_DIR}
-
-# Set Application specific permissions (replaces the `init` script)
-RUN chmod +x ${APP_DIR}/yii && \
-    chmod -R g=+wX ${APP_DIR}/sample/runtime
-
-RUN chmod +x /app/yii
-ENV PATH="/app:${PATH}"
-
 # Configure PHP (use php.ini-development)
 RUN ln -s /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini
 # Configure PHP Xdebug (Remove default config and use own)
@@ -61,3 +49,17 @@ RUN chmod 770 /tmp/xdebug
 
 COPY docker/Yii2SecurityTxt/docker-php-entrypoint /usr/local/bin/docker-php-entrypoint
 RUN chmod +x /usr/local/bin/docker-php-entrypoint
+
+# Copy the app directory. NOTE! For development docker-compose will overwrite this directory with a mount
+COPY --chown=root:www-data --chmod=740 . ${APP_DIR}
+# In the COPY above --chmod should be "=u=rwX,g=rX,o=" so no further `chmod` is needed but that's currently not supported: https://github.com/moby/buildkit/issues/1951
+RUN find ${APP_DIR} -path "./vendor" -prune -o -type d -exec chmod 750 {} +
+# Change ownership for the app root directory (not set by the COPY command). Note: no chown is currently needed since it's already set by the workaround above.
+RUN chown root:www-data ${APP_DIR}
+
+# Set Application specific permissions (replaces the `init` script)
+RUN chmod +x ${APP_DIR}/yii && \
+    chmod -R g=+wX ${APP_DIR}/sample/runtime
+
+RUN chmod +x /app/yii
+ENV PATH="/app:${PATH}"

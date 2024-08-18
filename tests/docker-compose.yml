@@ -6,7 +6,9 @@ services:
     build:
       context: ..
       dockerfile: docker/Yii2SecurityTxt/Dockerfile
-    image: "rhertogh/yii2-securitytxt"
+      args:
+        PHP_VERSION: ${PHP_VERSION:-8.1}
+    image: rhertogh/yii2-securitytxt-php${PHP_VERSION:-8.1}
     networks:
       - test
     ports:
