@@ -123,6 +123,9 @@ class SecurityTxtModule extends Module implements BootstrapInterface
      */
     public array|string|null $preferredLanguages = null;
 
+    /**
+     * @var string|null ASCII-armored PGP private key.
+     */
     public string|null $pgpPrivateKey = null;
 
     /**

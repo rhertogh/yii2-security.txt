@@ -27,7 +27,7 @@ return ArrayHelper::merge(require('main.php'), [
             // security.txt Fields.
             'contact' => [ // Required, https://www.rfc-editor.org/rfc/rfc9116.html#name-contact.
                 'admin@example.com',
-                'https://example.com/report'
+                'https://example.com/report',
             ],
             'policy' => 'https://example.com/report-policy', // Optional, https://www.rfc-editor.org/rfc/rfc9116.html#name-policy.
             'preferredLanguages' => 'en', // Optional, https://www.rfc-editor.org/rfc/rfc9116.html#name-preferred-languages.
@@ -51,7 +51,9 @@ return ArrayHelper::merge(require('main.php'), [
                 'hiring' => 'Want to join our awesome team?',
             ],
 
-            // Optional, PGP private key. Note: Requires the GNU Privacy Guard php extension (ext-gnupg) to be installed.
+            // Optional, ASCII-armored PGP private key.
+            // Note: Requires the Crypt_GPG package (https://packagist.org/packages/pear/crypt_gpg)
+            // or the "gnupg" extension (https://www.php.net/manual/en/book.gnupg.php) to be installed.
             'pgpPrivateKey' => getenv('YII2_SECURITY_TXT_PGP_PRIVATE_KEY'),
         ],
         'debug' => [

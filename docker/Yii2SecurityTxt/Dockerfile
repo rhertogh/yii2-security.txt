@@ -19,11 +19,13 @@ RUN apt-get update
 RUN apt-get install -y iputils-ping
 #endregion
 
-#RUN apt-get -y install software-properties-common gnupg gnupg2 libgpgme-dev
+# Install devlopment version of GPGME https://gnupg.org/software/gpgme/index.html
 RUN apt-get -y install libgpgme-dev
+
+# Install pecl gnupg
 RUN pecl install -f gnupg && docker-php-ext-enable gnupg
 
-# Note: `/var/www` is the home directory for www-data
+# Create gnupg homedir (Note: `/var/www` is the home directory for www-data)
 RUN mkdir -p /var/www/.gnupg
 RUN chown www-data:www-data /var/www/.gnupg
 ENV GNUPGHOME="/var/www/.gnupg"
