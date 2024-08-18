@@ -27,7 +27,7 @@
         "codeception/codeception": "~5.1.2",
         "codeception/module-asserts": "~3.0.0",
         "codeception/module-yii2": "~1.1.10",
-        "lcobucci/clock": "~3.0.0",
+        "lcobucci/clock": "^3.0.0",
         "pear/crypt_gpg": "^1.6.9",
         "vlucas/phpdotenv": "~5.3",
         "yiisoft/yii2-apidoc": "~3.0.6",
