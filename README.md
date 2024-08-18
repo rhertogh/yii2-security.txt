@@ -8,7 +8,8 @@ Yii2 security.txt extension
 [![GitHub](https://img.shields.io/github/license/rhertogh/yii2-security.txt?color=brightgreen)](https://github.com/rhertogh/yii2-security.txt/blob/master/LICENSE.md)
 
 A Yii2 extension to serve .well-known/security.txt  
-[RFC 9116: A File Format to Aid in Security Vulnerability Disclosure.](https://www.rfc-editor.org/rfc/rfc9116)
+[RFC 9116: A File Format to Aid in Security Vulnerability Disclosure.](https://www.rfc-editor.org/rfc/rfc9116)  
+You can view generated examples [here](docs/guide/sample.md).
 
 ### 📑 Contents
 
@@ -16,8 +17,6 @@ A Yii2 extension to serve .well-known/security.txt
 - [Test Drive](#%EF%B8%8F-test-drive)
 - [Documentation](#-documentation)
 - [FAQ](#-faq)
-- [Implemented Standards](#-implemented-standards)
-- [Importing/Migrating](#-importingmigrating)
 - [Versioning & Change Log](#-versioning--change-log)
 - [Reporting Security issues](#-reporting-security-issues)
 - [Directory Structure](#-directory-structure)
