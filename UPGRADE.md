@@ -7,7 +7,7 @@ Even though we try to ensure backwards compatibility (BC) as much as possible, s
 it is not possible or very complicated to avoid it and still create a good solution to
 a problem.
 
-The Yii2SecurityTxt project follows [Semantic Versioning 2.0](https://semver.org/spec/v2.0.0.html)  
+The Yii2SecurityTxt extension follows [Semantic Versioning 2.0](https://semver.org/spec/v2.0.0.html)  
 Please see the [Change Log](CHANGELOG.md) for more information on version history.
 
 > [!NOTE]

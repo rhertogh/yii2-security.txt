@@ -1,15 +1,14 @@
-Yii2 security.txt
-=================
+Yii2 security.txt extension
+===========================
 
 [![Latest Stable Version](https://img.shields.io/packagist/v/rhertogh/yii2-security.txt.svg)](https://packagist.org/packages/rhertogh/yii2-security.txt)
 [![build Status](https://github.com/rhertogh/yii2-security.txt/actions/workflows/build.yml/badge.svg)](https://github.com/rhertogh/yii2-security.txt/actions/workflows/build.yml)
-[![Documentation](https://readthedocs.org/projects/yii2-security.txt/badge/?version=latest)](https://yii2-security.txt.readthedocs.io/en/latest/)
 [![Code Coverage](https://scrutinizer-ci.com/g/rhertogh/yii2-security.txt/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/rhertogh/yii2-security.txt/?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/rhertogh/yii2-security.txt/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/rhertogh/yii2-security.txt/?branch=master)
 [![GitHub](https://img.shields.io/github/license/rhertogh/yii2-security.txt?color=brightgreen)](https://github.com/rhertogh/yii2-security.txt/blob/master/LICENSE.md)
 
 A Yii2 extension to serve .well-known/security.txt  
-RFC 9116: A File Format to Aid in Security Vulnerability Disclosure.
+[RFC 9116: A File Format to Aid in Security Vulnerability Disclosure.](https://www.rfc-editor.org/rfc/rfc9116)
 
 ### 📑 Contents
 
@@ -100,7 +99,7 @@ tests/      Codeception unit and functional tests
 
 🚀 Contributing
 ---------------
-The Yii2SecurityTxt project is [Open Source](LICENSE.md). You can help by:
+The Yii2SecurityTxt extension is [Open Source](LICENSE.md). You can help by:
 
 - [Report an issue](docs/internals/report-an-issue.md)
 - [Contribute with new features or bug fixes](docs/internals/pull-request-qa.md)
@@ -116,5 +115,5 @@ Thanks in advance for your contribution!
 
 ✒️ License
 ----------
-The Yii2SecurityTxt project is free software. It is released under the terms of the Apache License.
+The Yii2SecurityTxt extension is free software. It is released under the terms of the Apache License.
 Please see [`LICENSE.md`](LICENSE.md) for more information.
