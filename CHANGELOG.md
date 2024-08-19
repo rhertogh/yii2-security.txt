@@ -11,8 +11,10 @@ Please check the [Upgrading Instructions](UPGRADE.md) when upgrading to a newer 
 ----------------------------
 
 ### Added
+- Added `GPGHelper::verify()` function. (rhertogh)
 
 ### Changed
+- The GPGHelper now creates a new and unique directory for each function call to avoid key reuse. (rhertogh) 
 
 ### Deprecated
 

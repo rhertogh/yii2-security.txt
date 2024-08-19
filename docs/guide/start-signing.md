@@ -22,6 +22,8 @@ Although the details of key management are outside the scope of this documentati
       `1` RSA and RSA (default)
    2. What key size do you want?
       `3072` (default)
+      Note: Sometimes the size of the key is limited (e.g. AWS SSM Parameter Store),
+      in such case you can use a smaller key (e.g. `2048`).
    3. Please specify how long the key should be valid.
       `0` key does not expire (default)
    4. Real name:
@@ -96,20 +98,8 @@ Installation
      ```bash
      brew install gpgme
      ```
-     
-2. Ensure the GnuPG home directory is writable.  
-   The GnuPG 'homedir' needs to be writable for the user under which the webserver process is running (e.g. www-data).
-   By default, the GnuPG 'homedir' is `~/.gnupg` (once again, of the user under which the webserver process is running).
-   
-   Create GnuPG 'homedir' and make it writable (assuming the webserver user is `www-data` and that user's homedir is `/var/www/`) 
-   ```bash
-   mkdir -p /var/www/.gnupg
-   chown www-data:www-data /var/www/.gnupg
-   ```
-   > [!TIP]
-   If you don't want to use the default GnuPG home directory, you can override it via the `GNUPGHOME` environment variable.
 
-3. To bridge PHP with GPGME the Yii2 security.txt extension supports two different options:  
+2. To bridge PHP with GPGME the Yii2 security.txt extension supports two different options:  
    > [!TIP]
      Only one of these libraries need to be installed.    
  
@@ -148,5 +138,8 @@ Public key distribution
 -----------------------
 
 The distribution of the PGP public key (by which security researches can verify the integrity of the security.txt file)
-is outside the scope of this extension. A recommended way is to publish the key via DNS protected by DNSSEC.  
-A helpful guide can be found at https://weberblog.net/pgp-key-distribution-via-dnssec-openpgpkey/.
+is outside the scope of this extension. There are multiple ways to publish the key, these include (but are not limited to):
+ - Via DNS protected by DNSSEC  
+   A helpful guide can be found at https://weberblog.net/pgp-key-distribution-via-dnssec-openpgpkey/.
+ - Via a trusted public key server  
+   E.g. https://keys.openpgp.org/

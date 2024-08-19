@@ -30,6 +30,7 @@ services:
       - YII2_SECURITY_TXT_PGP_PRIVATE_KEY=${YII2_SECURITY_TXT_PGP_PRIVATE_KEY:?err}
       # Yii2 security.txt tests
       - YII2_SECURITY_TXT_PGP_PUBLIC_KEY=${YII2_SECURITY_TXT_PGP_PUBLIC_KEY:?err}
+      - YII2_SECURITY_TXT_PGP_OTHER_PUBLIC_KEY=${YII2_SECURITY_TXT_PGP_OTHER_PUBLIC_KEY:?err}
     extra_hosts:
       - host.docker.internal:host-gateway
 

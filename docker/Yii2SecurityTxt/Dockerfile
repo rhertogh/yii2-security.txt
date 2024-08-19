@@ -25,11 +25,6 @@ RUN apt-get -y install libgpgme-dev
 # Install pecl gnupg
 RUN pecl install -f gnupg && docker-php-ext-enable gnupg
 
-# Create gnupg homedir (Note: `/var/www` is the home directory for www-data)
-RUN mkdir -p /var/www/.gnupg
-RUN chown www-data:www-data /var/www/.gnupg
-ENV GNUPGHOME="/var/www/.gnupg"
-
 COPY docker/Yii2SecurityTxt/apache/vhost.conf /etc/apache2/sites-available/000-default.conf
 
 # Create alias for PHP with Xdebug

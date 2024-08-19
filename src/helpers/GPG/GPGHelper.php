@@ -28,7 +28,7 @@ class GPGHelper
     public static GPGDriver|null $driver = null;
 
     /**
-     * Sign a message.
+     * Signs a message.
      *
      * @throws InvalidConfigException
      * @throws Crypt_GPG_Exception
@@ -39,6 +39,21 @@ class GPGHelper
         return match (static::determineDriver()) {
             GPGDriver::CryptGPG => static::signViaCryptGPG($message, $privateKey),
             GPGDriver::GnupgExtension => static::signViaGnupgExtension($message, $privateKey),
+        };
+    }
+
+    /**
+     * Verifies a message and returns the content or `false` if the signature is invalid.
+     *
+     * @throws InvalidConfigException
+     * @throws Crypt_GPG_Exception
+     * @throws PEAR_Exception
+     */
+    public static function verify(string $message, string $publicKey): string|false
+    {
+        return match (static::determineDriver()) {
+            GPGDriver::CryptGPG => static::verifyViaCryptGPG($message, $publicKey),
+            GPGDriver::GnupgExtension => static::verifyViaGnupgExtension($message, $publicKey),
         };
     }
 

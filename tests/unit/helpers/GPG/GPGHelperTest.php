@@ -17,41 +17,35 @@ use Yii2SecurityTxtTests\unit\TestCase;
 class GPGHelperTest extends TestCase
 {
     /**
-     * @dataProvider signProvider
+     * @dataProvider signVerifyProvider
      */
-    public function testSign($GPGDriver)
+    public function testSignVerify($signDriver, $verifyDriver)
     {
-        GPGHelper::$driver = $GPGDriver;
-
         $privateKey = getenv('YII2_SECURITY_TXT_PGP_PRIVATE_KEY');
         $publicKey = getenv('YII2_SECURITY_TXT_PGP_PUBLIC_KEY');
+        $otherPublicKey = getenv('YII2_SECURITY_TXT_PGP_OTHER_PUBLIC_KEY');
 
         $message = <<<'TXT'
             test message
 
             TXT;
 
-        $response = GPGHelper::sign($message, $privateKey);
+        GPGHelper::$driver = $signDriver;
+        $signed = GPGHelper::sign($message, $privateKey);
 
-        $gpg = new Crypt_GPG();
-        $keyInfo = $gpg->importKey($publicKey);
-        $gpg->addEncryptKey($keyInfo['fingerprint']);
-        /** @var array{
-         *     data: string,
-         *     signatures: Crypt_GPG_Signature[],
-         * } $info
-         */
-        $info = $gpg->decryptAndVerify($response);
-
-        $this->assertTrue($info['signatures'][0]->isValid());
-        $this->assertSame($message, $info['data']);
+        GPGHelper::$driver = $verifyDriver;
+        $verified = GPGHelper::verify($signed, $publicKey);
+        $this->assertSame($message, $verified);
+        $this->assertFalse(GPGHelper::verify($signed, $otherPublicKey));
     }
 
-    public function signProvider(): array
+    public function signVerifyProvider(): array
     {
         return [
-            'GPGDriver:CryptGPG' => [GPGDriver::CryptGPG],
-            'GPGDriver:GnupgExtension' => [GPGDriver::GnupgExtension],
+            'CryptGPG:CryptGPG' => [GPGDriver::CryptGPG, GPGDriver::CryptGPG],
+            'CryptGPG:GnupgExtension' => [GPGDriver::CryptGPG, GPGDriver::GnupgExtension],
+            'GnupgExtension:GnupgExtension' => [GPGDriver::GnupgExtension, GPGDriver::GnupgExtension],
+            'GnupgExtension:CryptGPG' => [GPGDriver::GnupgExtension, GPGDriver::CryptGPG],
         ];
     }
 }
