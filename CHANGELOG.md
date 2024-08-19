@@ -7,14 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Please check the [Upgrading Instructions](UPGRADE.md) when upgrading to a newer version.  
 
-[1.0.0-alpha2] - Unreleased
+[1.0.0-alpha3] - Unreleased
 ----------------------------
 
 ### Added
-- Added `GPGHelper::verify()` function. (rhertogh)
 
 ### Changed
-- The GPGHelper now creates a new and unique directory for each function call to avoid key reuse. (rhertogh) 
 
 ### Deprecated
 
@@ -25,6 +23,17 @@ Please check the [Upgrading Instructions](UPGRADE.md) when upgrading to a newer 
 ### Improved
 
 ### Security
+
+
+[1.0.0-alpha2] - 2024-08-19
+----------------------------
+
+### Added
+- Added `GPGHelper::verify()` function. (rhertogh)
+
+### Changed
+- The GPGHelper now creates a new and unique directory for each function call to avoid key reuse. (rhertogh) 
+
 
 
 [1.0.0-alpha1] - 2024-08-18
